@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<style type="text/css">
+	*{
+		padding:0;
+		margin: 0;
+		box-sizing: border-box;
+		background-color:#f2f2f2;
+	}
+	.box1{
+		width:30rem;
+		height:30rem;
+		float:left;
+		background-color:white;
+		margin-right:2rem;		
+	}
+	.box2{
+		width:30rem;
+		height:30rem;
+		background-color:white;
+		float: left;
+	}
+</style>
+<script type="text/javascript">
+	var w=document.documentElement.getBoundingClientRect().width;
+	//7.5是根据设计图的大小除以100，需要按照你的实际设计图换算
+	var bili=w/75;
+	document.documentElement.style.fontSize=bili+"px";
+</script>
+<body>
+	<div class="box1">
+		
+	</div>
+	<div class="box2">
+		
+	</div>
+	<script type="text/javascript">
+		var xhr=new XMLHttpRequest();
+		   xhr.open("get"," https://www.nanzhan-info.com:1156/api/Matchs/GetMatchsVideos?isRecommend=0&pagination.rows=10&pagination.page=1&pagination.sidx=MRelation_CreateTime&pagination.sord=asc&pagination.records=20");
+		   xhr.send();
+		   xhr.onreadystatechange=function(){
+			   if(xhr.readyState==4&&xhr.status==200){
+				     var  jso=JSON.parse(xhr.responseText);
+					 console.log(jso[0]);
+					 var html1="";
+					 html1+=`<img src="${jso[0].MRelation_VideoSmallPic}" alt="">
+					 <p>${jso[0].MRelation_Title}</p>`
+					 var html2="";
+					 html2+=`<img src="${jso[0].MRelation_VideoSmallPic}" alt="">
+					 <p>${jso[1].MRelation_Title}</p>`
+			   }
+			     var dv=document.getElementsByClassName("box1")[0];
+				 var dv2=document.getElementsByClassName("box2")[0];
+				 dv.innerHTML=html1;
+				 dv2.innerHTML=html2;
+		   }
+			   
+		   
+		   
+	</script>
+</body>
+</html>
